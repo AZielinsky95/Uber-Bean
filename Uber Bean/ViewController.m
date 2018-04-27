@@ -52,12 +52,14 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
     [NetworkManager fetchYelpDataAtCoordinates:loc block:^(NSArray *cafes)
     {
         self.cafes = cafes;
-        [self.mapView showAnnotations:self.cafes animated:YES];
+        [NSOperationQueue.mainQueue addOperationWithBlock:^{
+            [self.mapView showAnnotations:self.cafes animated:YES];
+        }];
     }];
     
     [self.mapView
      setRegion:MKCoordinateRegionMake(loc.coordinate,
-                                      MKCoordinateSpanMake(0.06, 0.06))
+                                      MKCoordinateSpanMake(0.005, 0.005))
      animated:YES];
 }
 
