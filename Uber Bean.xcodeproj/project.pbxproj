@@ -13,6 +13,8 @@
 		CAB3229320938B17008BA8A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAB3229220938B17008BA8A0 /* Assets.xcassets */; };
 		CAB3229620938B17008BA8A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAB3229420938B17008BA8A0 /* LaunchScreen.storyboard */; };
 		CAB3229920938B17008BA8A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB3229820938B17008BA8A0 /* main.m */; };
+		CAB322A12093AACE008BA8A0 /* Cafe.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB322A02093AACE008BA8A0 /* Cafe.m */; };
+		CAB322A42093AC80008BA8A0 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB322A32093AC80008BA8A0 /* NetworkManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,10 @@
 		CAB3229520938B17008BA8A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CAB3229720938B17008BA8A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CAB3229820938B17008BA8A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CAB3229F2093AACE008BA8A0 /* Cafe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cafe.h; sourceTree = "<group>"; };
+		CAB322A02093AACE008BA8A0 /* Cafe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cafe.m; sourceTree = "<group>"; };
+		CAB322A22093AC80008BA8A0 /* NetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
+		CAB322A32093AC80008BA8A0 /* NetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,10 @@
 				CAB3229420938B17008BA8A0 /* LaunchScreen.storyboard */,
 				CAB3229720938B17008BA8A0 /* Info.plist */,
 				CAB3229820938B17008BA8A0 /* main.m */,
+				CAB3229F2093AACE008BA8A0 /* Cafe.h */,
+				CAB322A02093AACE008BA8A0 /* Cafe.m */,
+				CAB322A22093AC80008BA8A0 /* NetworkManager.h */,
+				CAB322A32093AC80008BA8A0 /* NetworkManager.m */,
 			);
 			path = "Uber Bean";
 			sourceTree = "<group>";
@@ -142,8 +152,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAB322A12093AACE008BA8A0 /* Cafe.m in Sources */,
 				CAB3228E20938B17008BA8A0 /* ViewController.m in Sources */,
 				CAB3229920938B17008BA8A0 /* main.m in Sources */,
+				CAB322A42093AC80008BA8A0 /* NetworkManager.m in Sources */,
 				CAB3228B20938B17008BA8A0 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
