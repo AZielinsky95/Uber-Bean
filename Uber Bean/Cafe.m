@@ -12,6 +12,7 @@
 
 -(instancetype)initWithData:(NSDictionary*)dictionary
 {
+    self = [super init];
     _name = dictionary[@"name"];
     NSDictionary * coordinates = dictionary[@"coordinates"];
     NSString *lat = coordinates[@"latitude"];
@@ -21,6 +22,8 @@
     
     _imageURL = dictionary[@"image_url"];
     
+    _title = _name;
+    _coordinate = _coordinates;
     
     return self;
 }

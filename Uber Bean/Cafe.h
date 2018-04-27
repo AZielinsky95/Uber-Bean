@@ -8,12 +8,18 @@
 
 #import <Foundation/Foundation.h>
 @import CoreLocation;
-@interface Cafe : NSObject
+@import MapKit;
+
+@interface Cafe : NSObject <MKAnnotation>
 
 //geo coordinates, the image url, and the name of the place
 @property CLLocationCoordinate2D coordinates;
 @property NSString *imageURL;
 @property NSString *name;
+
+@property (nonatomic,assign) CLLocationCoordinate2D coordinate;
+
+@property (nonatomic,copy,nullable) NSString *title;
 
 -(instancetype)initWithData:(NSDictionary*)dictionary;
 @end

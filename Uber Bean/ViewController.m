@@ -48,11 +48,11 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
     NSLog(@"Updated locations %@", locations);
     CLLocation *loc = locations[0];
-
     
     [NetworkManager fetchYelpDataAtCoordinates:loc block:^(NSArray *cafes)
     {
         self.cafes = cafes;
+        [self.mapView showAnnotations:self.cafes animated:YES];
     }];
     
     [self.mapView
@@ -61,15 +61,28 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
      animated:YES];
 }
 
--(void)parseJSON:(NSDictionary*)dictionary
-{
-    
-    
-}
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
      NSLog(@"Failed with error %@",error);
 }
+
+//#pragma mark - MKMapViewDelegate
+//
+//- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+//{
+//    if ([annotation isKindOfClass:[Cafe class]]) {
+//        MKMarkerAnnotationView *mark = (MKMarkerAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"cafe"                                                                              forAnnotation:annotation];
+//
+//        mark.markerTintColor = [UIColor purpleColor];
+//        mark.glyphText = annotation.title;
+//        mark.titleVisibility = MKFeatureVisibilityVisible;
+//        mark.animatesWhenAdded = YES;
+//
+//        return mark;
+//    }
+//
+//    return nil;
+//}
 
 @end
