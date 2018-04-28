@@ -13,10 +13,13 @@
 -(instancetype)initWithData:(NSDictionary*)dictionary
 {
     self = [super init];
+
     _name = dictionary[@"name"];
     NSDictionary * coordinates = dictionary[@"coordinates"];
     NSString *lat = coordinates[@"latitude"];
     NSString *lng = coordinates[@"longitude"];
+   
+    _rating = dictionary[@"rating"];
    
     _coordinates = CLLocationCoordinate2DMake([lat doubleValue],[lng doubleValue]);
     

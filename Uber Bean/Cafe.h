@@ -16,6 +16,7 @@
 @property CLLocationCoordinate2D coordinates;
 @property NSString *imageURL;
 @property NSString *name;
+@property NSString *rating;
 
 @property (nonatomic,assign) CLLocationCoordinate2D coordinate;
 

@@ -51,4 +51,29 @@
     
     [task resume];
 }
+
++(void)downloadImage:(NSString*)urlString block:(void(^)(UIImage* image))blockName
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration]; // 2
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration]; // 3
+    
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
+    
+    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:url completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (error) { // 1
+            // Handle the error
+            NSLog(@"error: %@", error.localizedDescription);
+            return;
+        }
+        
+        NSData *data = [NSData dataWithContentsOfURL:location];
+        UIImage *image = [UIImage imageWithData:data]; // 2
+        
+        blockName(image);
+    }];
+    
+    
+    [downloadTask resume]; // 5
+}
 @end

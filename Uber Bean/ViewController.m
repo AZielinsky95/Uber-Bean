@@ -54,13 +54,11 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
         self.cafes = cafes;
         [NSOperationQueue.mainQueue addOperationWithBlock:^{
             [self.mapView showAnnotations:self.cafes animated:YES];
+            
+            [self.mapView setRegion:MKCoordinateRegionMake(loc.coordinate,MKCoordinateSpanMake(0.005, 0.005))
+                           animated:YES];
         }];
     }];
-    
-    [self.mapView
-     setRegion:MKCoordinateRegionMake(loc.coordinate,
-                                      MKCoordinateSpanMake(0.005, 0.005))
-     animated:YES];
 }
 
 
@@ -69,22 +67,76 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
      NSLog(@"Failed with error %@",error);
 }
 
-//#pragma mark - MKMapViewDelegate
-//
-//- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
-//{
-//    if ([annotation isKindOfClass:[Cafe class]]) {
-//        MKMarkerAnnotationView *mark = (MKMarkerAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"cafe"                                                                              forAnnotation:annotation];
-//
-//        mark.markerTintColor = [UIColor purpleColor];
-//        mark.glyphText = annotation.title;
-//        mark.titleVisibility = MKFeatureVisibilityVisible;
-//        mark.animatesWhenAdded = YES;
-//
-//        return mark;
-//    }
-//
-//    return nil;
-//}
+#pragma mark - MKMapViewDelegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    if ([annotation isKindOfClass:[Cafe class]]) {
+        MKMarkerAnnotationView *mark = (MKMarkerAnnotationView*)[self.mapView dequeueReusableAnnotationViewWithIdentifier:MKMapViewDefaultAnnotationViewReuseIdentifier                                                                              forAnnotation:annotation];
+
+        [mark setUserInteractionEnabled:YES];
+        mark.canShowCallout = YES;
+        mark.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeInfoLight];
+        mark.enabled = YES;
+        mark.animatesWhenAdded = YES;
+    
+        return mark;
+    }
+
+    return nil;
+}
+
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    if ([view.annotation isKindOfClass:[Cafe class]])
+    {
+
+        Cafe *cafe = (Cafe *)view.annotation;
+    
+        UIImageView *temp = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5,50, 50)];
+
+
+        [NetworkManager downloadImage:cafe.imageURL block:^(UIImage *image)
+                      {
+                           [NSOperationQueue.mainQueue addOperationWithBlock:^{
+                               
+                               temp.image = image;
+                           }];
+                      }];
+        
+        temp.contentMode = UIViewContentModeScaleAspectFit;
+        
+        view.leftCalloutAccessoryView = temp;
+        
+        UILabel *subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5,75, 30)];
+        subtitleLabel.text = [self ratingToStars:cafe.rating];
+        view.detailCalloutAccessoryView = subtitleLabel;
+    }
+}
+
+-(NSString*)ratingToStars:(NSString*)rating
+{
+    int numOfStars = [rating intValue];
+    
+    switch (numOfStars)
+    {
+        case 1:
+           return @"⭐️";
+            break;
+        case 2:
+           return @"⭐️⭐️";
+            break;
+        case 3:
+            return @"⭐️⭐️⭐️";
+            break;
+        case 4:
+            return @"⭐️⭐️⭐️⭐️";
+            break;
+        case 5:
+            return @"⭐️⭐️⭐️⭐️⭐️";
+            break;
+    }
+    return @"";
+}
 
 @end

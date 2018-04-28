@@ -7,10 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 @import CoreLocation;
 
 @interface NetworkManager : NSObject
 
 +(void)fetchYelpDataAtCoordinates:(CLLocation*)location block:(void(^)(NSArray* cafes))blockName;
+
+
++(void)downloadImage:(NSString*)urlString block:(void(^)(UIImage* image))blockName;
 
 @end
